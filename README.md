@@ -22,6 +22,7 @@ gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
 
 3. Run the shell using the following command:
 
+```
 ./hsh
 ```
 
@@ -50,6 +51,7 @@ This shell supports the following built-in commands:
 
 To execute a command, simply type it into the shell prompt and press enter. For example:
 
+```
 $ ls -l
 ```
 
