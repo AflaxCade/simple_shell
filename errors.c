@@ -1,6 +1,6 @@
 #include "shell.h"
 
-/*
+/**
  * _eputs - Prints the given string to the standard error stream (stderr)
  * @str: The string to be printed
  *
@@ -19,7 +19,7 @@ void _eputs(char *str)
 	}
 }
 
-/*
+/**
  * _eputchar - Writes the character 'c' to the standard error stream (stderr)
  * @c: The character to be written
  *
@@ -43,13 +43,12 @@ int _eputchar(char c)
 	return (1);
 }
 
-/*
+/**
  * _putfd - Writes the character 'c' to the specified file descriptor
  * @c: The character to be written
  * @fd: The file descriptor to write the character to
  *
- * This function writes the specified character to the specified file
- * descriptor.
+ * This function writes the specified character to the specified file descriptor.
  *
  * Return: On success, returns 1.
  *         On error, returns -1 and sets the appropriate errno.
@@ -69,13 +68,12 @@ int _putfd(char c, int fd)
 	return (1);
 }
 
-/*
+/**
  * _putsfd - Prints a given string to the specified file descriptor
  * @str: The string to be printed
  * @fd: The file descriptor to write the string to
  *
- * This function prints the specified string to the specified file
- * descriptor.
+ * This function prints the specified string to the specified file descriptor.
  *
  * Return: The number of characters written.
  */
