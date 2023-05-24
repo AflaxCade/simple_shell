@@ -1,0 +1,137 @@
+.TH hsh(1)
+
+.SH NAME
+.B hsh
+- Simple Shell
+
+.SH DESCRIPTION
+.B hsh
+is a custom UNIX command line interpreter, built entirely in C language. It executes commands read from the standard input. The memory management has been handled.
+
+.SH BUILT WITH
+.B hsh
+was developped with C programming language.
+
+.SH FEATURES
+The shell handles the command lines with arguments and pathways.
+.B hsh
+supports two modes:
+.B interactive
+and
+.B non-interactive
+
+.SH ARGUMENTS
+An attempt is first made to open the file in the current directory, and, if no file is found, then the shell searches the directories in PATH for the script. To invoke a script or file, the first argument is assumed to be the filename, no other options are necessary.
+
+.SH BUILT-INS
+The following built-ins functions have been implemented. 
+.TP
+.B alias [name[=value]]
+Example : alias l=ls (sets the key l to ls)
+.TP
+.B cd [dir]
+Change the current directory to dir. If a non-empty directory name from CDPATH is used, or if - is the first argument, and the directory change is succesful, the absolute pathname of the new working directory is written to the standard output.
+.TP
+.B env [key=value]
+This prints out all the environemental variables and its values. Each variable is separated by a new line. Each variable is outputed as followed.
+.TP
+.B exit [status]
+The exit command terminates the current shell. If
+.I status
+is given, the return code to the parent process is set to
+.I status.
+If not, it returns the most recently executed command.
+
+
+.SH EXAMPLES
+Below are presented examples of hsh usage.
+
+.TP
+.B Interactive
+
+In interactive mode, hsh receives directly the command from the user: standard input linked to the terminal and detected by the 
+.B isatty(3)
+function
+
+.TP
+.B Non interactive
+
+In non interactive mode, the commands are read according to the piped commands.
+
+.SH PARAMETERS
+A parameter is set if it has been assigned a value. The null string is a valid value. Once a variable is set, it may be unset only by using the unset builtin command.
+
+A variable may be assigned to by a statement of the form
+.I name=[value]
+
+The shell treats severaly parameters specially. All special parameters begin with
+.B $
+, following another special character.
+.B $
+Expands to the process ID of the shell. In a () subshell, it expands to the process ID of the current shell, not the subshell.
+
+.B ?
+Expands to the exit status of the most recently executed foreground pipeline.
+
+.SH EXIT STATUS
+The return value of a command is its exit status. If commands succeed, they return 0, else they return 127. Builtin commands return 0 on success and 2 on failure. If a command is not found, the child process created to execute returns a status of 127.
+
+
+
+.RS 1.2i
+
+.TS
+tab(@), left, box;
+c | c
+rB | r.
+Exit@Description
+_
+0@Success
+-1@Failure
+127@Command not found
+.TE
+.RE
+
+.SH LIBRARIES
+.IP stdlib.h
+.IP stdio.h
+.IP unistd.h
+.IP string.h
+.IP sys/types.h
+.IP sys/wait.h
+.IP sys/stat.h
+
+.SH FILES
+
+.RS 1.2i
+
+.TS
+tab(@), left, box;
+c | c
+rB | r.
+File@Description
+_
+main.c@Entry point that displays a prompt checks if user entered exit or CTRL + D and reads user input
+main.h@Header files, containing all functions prototypes as well as the librairies used
+assembly_command.c@Assembles the command
+env_command.c@Prints the current environment
+execute_command.c@Creates a child process and execute the command
+input_command.c@Tokenises the input received
+is_path.c@Checks if there is a '/' in the command
+path_command.c@Finds the path to execute the command
+.TE
+.RE
+
+.SH SEE ALSO
+bash(1)
+
+.SH BUGS
+No bugs detected.
+
+.SH AUTHORS
+.PP
+@Hugo Chilemme
+
+@Sony Nguyen
+
+@Camille Favriel
